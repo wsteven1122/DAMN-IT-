@@ -2433,7 +2433,7 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
 .gallery-wrapper {
   width: min(1100px, 94%);
   max-height: 100%;
-  margin : 0 auto;
+  margin: 0 auto;
   padding-top: 120px;
   background: rgba(255, 255, 255, 0.68);
   border-radius: 28px;
@@ -2476,8 +2476,9 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
 .gallery-ribbon {
   display: inline-block;
   padding: 10px 18px;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  background: linear-gradient(135deg, #ed7355);
   color: #1a0f00;
+  outline: #111;
   font-weight: 900;
   border-radius: 18px;
   box-shadow: 0 12px 24px rgba(255, 95, 109, 0.28);
@@ -3870,4 +3871,3 @@ body {
   z-index: 3;
   opacity: 0.85;
 }
-
