@@ -810,6 +810,17 @@ body.hand-cursor-right {
   right: 18%;
 }
 
+.sticker-egg-white {
+  width: min(70vw, 1180px);
+  max-width: none;
+  max-height: none;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -54%) scale(var(--floating-max-scale));
+  opacity: 0.94;
+  animation: eggwhite-drift 16s ease-in-out infinite alternate;
+}
+
 .sticker-pants {
   width: clamp(120px, 14vw, 170px);
   --tilt: 5deg;
@@ -840,6 +851,18 @@ body.hand-cursor-right {
   }
   100% {
     transform: translate(-50%, -40%) rotate(-12deg);
+  }
+}
+
+@keyframes eggwhite-drift {
+  0% {
+    transform: translate(-50%, -56%) scale(var(--floating-max-scale)) rotate(-6deg);
+  }
+  50% {
+    transform: translate(-50%, -52%) scale(calc(var(--floating-max-scale) * 1.02)) rotate(-3deg);
+  }
+  100% {
+    transform: translate(-50%, -58%) scale(var(--floating-max-scale)) rotate(-5deg);
   }
 }
 
@@ -3123,42 +3146,55 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
 }
 
-/* 幕簾轉場：快關、慢開並帶有抖動感 */
+/* 幕簾轉場：以 GIF 布幕覆蓋全畫面 */
 #curtain-transition {
   position: fixed;
   inset: 0;
-  display: none;
-  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   z-index: var(--z-index-curtain);
   opacity: 0;
   visibility: hidden;
-  transform: none;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.6));
+  transition: opacity 0.38s ease-in-out, visibility 0.38s ease-in-out;
 }
 
-#curtain-transition .curtain {
-  width: 50%;
-  background: none;
-  transform: none;
-  transition: none;
-  box-shadow: none;
-  position: relative;
-  clip-path: none;
-  display: none;
+#curtain-transition.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-#curtain-transition .curtain::before {
-  content: "";
-  display: none;
-}
-
-#curtain-transition.active,
-#curtain-transition.shudder,
 #curtain-transition.open {
-  display: none;
   opacity: 0;
   visibility: hidden;
-  transform: none;
+}
+
+#curtain-transition .curtain-graphic {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.45));
+  animation: curtain-pulse 1.2s ease-in-out;
+}
+
+@keyframes curtain-pulse {
+  0% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
 }
 
 #screen-2 {
@@ -3827,8 +3863,10 @@ body {
 #curtain-transition {
   position: fixed;
   inset: 0;
-  z-index: 60;
-  display: none;
+  z-index: var(--z-index-curtain);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
