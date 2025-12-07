@@ -1,0 +1,107 @@
+commit 158b2b54aadd13b418fb6283337303784d0c892f
+Author: eight04 <eight04@gmail.com>
+Date:   Sun Dec 7 21:44:03 2025 +0800
+
+    2143 card hover prototype
+
+diff --git a/css/Style.css b/css/Style.css
+index 45f0bcb..e0f9bbf 100644
+--- a/css/Style.css
++++ b/css/Style.css
+@@ -2521,6 +2521,7 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
+   transition: transform 0.35s ease, box-shadow 0.35s ease,
+     border-color 0.35s ease;
+   backdrop-filter: blur(4px);
++  overflow: hidden;
+ }
+ 
+ .gallery-card img {
+@@ -2563,6 +2564,23 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
+   opacity: 0.55;
+ }
+ 
++.card-hover-popover {
++  opacity: 0;
++  position: absolute;
++  top: 0;
++  left: 0;
++  width: 100%;
++  height: 100%;
++  /* TODO: 按需求調整背景色 */
++  background: black;
++  color: white;
++  transition: opacity 0.3s ease;
++
++  .gallery-card:hover & {
++    opacity: 1;
++  }
++}
++
+ .locked-mask {
+   position: absolute;
+   inset: 0;
+diff --git a/index.html b/index.html
+index 226c96f..4b344b5 100644
+--- a/index.html
++++ b/index.html
+@@ -667,6 +667,12 @@
+                       <h3>米特蛋 #001</h3>
+                       <p>基礎型態，閃著溫暖光澤的入門款。</p>
+                     </div>
++                    <div class="card-hover-popover">
++                      <!-- TODO: 把素材改成實際素材圖片，並調整各自位置 -->
++                      <p>素材1</p>
++                      <p>素材2</p>
++                      <p>素材3</p>
++                    </div>
+                   </article>
+                   <article class="gallery-card tilt-2" role="listitem">
+                     <img src="./img/邪惡蟲蟲蛋糕.png" alt="邪惡蟲蟲蛋糕" />
+@@ -674,6 +680,11 @@
+                       <h3>邪惡蟲蟲蛋糕</h3>
+                       <p>綿密口感，苦味在廚房飄蕩。</p>
+                     </div>
++                    <div class="card-hover-popover">
++                      <p>素材1</p>
++                      <p>素材2</p>
++                      <p>素材3</p>
++                    </div>
+                   </article>
+                   <article class="gallery-card tilt-3" role="listitem">
+                     <img src="./img/流星鎚 1.png" alt="流星鎚" />
+@@ -681,6 +692,11 @@
+                       <h3>流星鎚</h3>
+                       <p>攪動星辰的流星鎚，讓蛋呈現夜空色澤。</p>
+                     </div>
++                    <div class="card-hover-popover">
++                      <p>素材1</p>
++                      <p>素材2</p>
++                      <p>素材3</p>
++                    </div>
+                   </article>
+                   <article class="gallery-card tilt-1" role="listitem">
+                     <img src="./img/地獄跳跳糖.png" alt="地獄跳跳糖" />
+@@ -688,6 +704,11 @@
+                       <h3>地獄跳跳糖</h3>
+                       <p>透明的果凍層，上浮著撒旦光點。</p>
+                     </div>
++                    <div class="card-hover-popover">
++                      <p>素材1</p>
++                      <p>素材2</p>
++                      <p>素材3</p>
++                    </div>
+                   </article>
+                   <article class="gallery-card tilt-2" role="listitem">
+                     <img src="./img/防摔手機殼.png" alt="防摔手機殼" />
+@@ -695,6 +716,11 @@
+                       <h3>防摔手機殼</h3>
+                       <p>漂浮在空中的手機殼，帶來堅固的味道。</p>
+                     </div>
++                    <div class="card-hover-popover">
++                      <p>素材1</p>
++                      <p>素材2</p>
++                      <p>素材3</p>
++                    </div>
+                   </article>
+                   <article class="gallery-card tilt-3 locked" role="listitem">
+                     <div class="locked-mask">未解鎖</div>
