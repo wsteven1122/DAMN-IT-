@@ -2514,7 +2514,7 @@ body.hands-folded .screen.active .hand-overlay .hand-image {
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: linear-gradient(180deg, #ffe9a3 0%, #ffc83a 100%);
+  background: linear-gradient(180deg, #f8b402 0%, #dd5e28 100%);
   background: #ffd447;
   border: 2px solid #ffb200;
   border: 2px solid #d19b00;
