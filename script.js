@@ -219,7 +219,7 @@ class GameController {
       this.dom.curtainLayer.style.display = "none";
       this.dom.curtainLayer.style.opacity = "0";
       this.dom.curtainLayer.style.pointerEvents = "none";
-      this.dom.curtainLayer.dataset.disabled = "true";
+      this.dom.curtainLayer.dataset.disabled = "false";
     }
     this.loadLottieAnimations();
     this.setupBackgroundMusic();
@@ -362,13 +362,32 @@ class GameController {
         return;
       }
 
-      layer.setAttribute("aria-hidden", "true");
-      layer.classList.remove("active", "open", "shudder");
-      layer.style.display = "none";
-      layer.style.opacity = "0";
-      layer.style.pointerEvents = "none";
-      midpointCallback?.();
-      resolve();
+      const totalDuration = CONFIG.TRANSITION_DURATION + CONFIG.CURTAIN_OPEN_MS;
+
+      layer.classList.remove("open");
+      layer.style.display = "flex";
+      layer.style.pointerEvents = "auto";
+      layer.setAttribute("aria-hidden", "false");
+
+      requestAnimationFrame(() => {
+        layer.classList.add("active");
+      });
+
+      setTimeout(() => {
+        midpointCallback?.();
+      }, CONFIG.CURTAIN_CLOSE_MS);
+
+      setTimeout(() => {
+        layer.classList.add("open");
+        layer.style.pointerEvents = "none";
+      }, CONFIG.TRANSITION_DURATION);
+
+      setTimeout(() => {
+        layer.classList.remove("active", "open", "shudder");
+        layer.style.display = "none";
+        layer.setAttribute("aria-hidden", "true");
+        resolve();
+      }, totalDuration);
     });
   }
 
